@@ -1,7 +1,13 @@
 class PostsController < ApplicationController
 
+
+  # checking if the user navigated to /authors/:id/posts or simply /posts
   def index
-    @posts = Post.all
+    if params[:author_id] #Provided by Rails via nested route. 
+      @posts = Author.find(params[:author_id]).posts 
+    else 
+      @posts = Post.all 
+    end 
   end
 
   def show
